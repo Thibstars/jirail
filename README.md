@@ -22,5 +22,8 @@ Make sure to add the repository to the `repositories` tag.
 </repository>
 ````
 
+## Implementations
+- [be-train-dashboard](https://github.com/Thibstars/be-train-dashboard)
+
 ---
 Apache 2.0 License
