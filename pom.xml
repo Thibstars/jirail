@@ -26,7 +26,7 @@
 
         <junit-jupiter.version>5.10.3</junit-jupiter.version>
         <junit-platform-launcher.version>1.10.3</junit-platform-launcher.version>
-        <mockito-core.version>5.12.0</mockito-core.version>
+        <mockito-core.version>5.20.0</mockito-core.version>
     </properties>
 
     <dependencies>
