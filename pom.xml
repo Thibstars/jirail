@@ -18,14 +18,14 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <okhttp.version>5.1.0</okhttp.version>
-        <jackson-databind.version>2.20.0</jackson-databind.version>
+        <okhttp.version>5.3.0</okhttp.version>
+        <jackson-databind.version>2.20.1</jackson-databind.version>
         <jackson-annotations.version>2.20</jackson-annotations.version>
         <guava.version>33.5.0-jre</guava.version>
         <logback.version>1.5.21</logback.version>
 
-        <junit-jupiter.version>6.0.0</junit-jupiter.version>
-        <junit-platform-launcher.version>6.0.0</junit-platform-launcher.version>
+        <junit-jupiter.version>6.0.1</junit-jupiter.version>
+        <junit-platform-launcher.version>6.0.1</junit-platform-launcher.version>
         <mockito-core.version>5.20.0</mockito-core.version>
     </properties>
 
