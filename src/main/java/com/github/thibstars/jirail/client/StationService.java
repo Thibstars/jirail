@@ -1,6 +1,6 @@
 package com.github.thibstars.jirail.client;
 
-import com.github.thibstars.jirail.model.Station;
+import com.github.thibstars.jirail.model.StationInfo;
 import java.util.Set;
 
 /**
@@ -13,6 +13,6 @@ public interface StationService {
      *
      * @return a set of all available Stations
      */
-    Set<Station> getStations(String language);
+    Set<StationInfo> getStations(String language);
 
 }

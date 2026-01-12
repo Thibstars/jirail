@@ -3,7 +3,7 @@ package com.github.thibstars.jirail.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.thibstars.jirail.exceptions.ClientException;
 import com.github.thibstars.jirail.helper.LanguageService;
-import com.github.thibstars.jirail.model.Station;
+import com.github.thibstars.jirail.model.StationInfo;
 import com.github.thibstars.jirail.model.Stations;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -42,22 +42,22 @@ public class StationServiceImpl implements StationService {
 
     private final LanguageService languageService;
 
-    private final LoadingCache<String, Map<String, Station>> cache;
+    private final LoadingCache<String, Map<String, StationInfo>> cache;
 
     public StationServiceImpl(OkHttpClient client, ObjectMapper objectMapper, LanguageService languageService) {
         this.client = client;
         this.objectMapper = objectMapper;
         this.languageService = languageService;
-        CacheLoader<String, Map<String, Station>> loader = new CacheLoader<>() {
+        CacheLoader<String, Map<String, StationInfo>> loader = new CacheLoader<>() {
             @NotNull
             @Override
-            public Map<String, Station> load(@NotNull String key) throws Exception {
+            public Map<String, StationInfo> load(@NotNull String key) throws Exception {
                 return cache.get(key);
             }
 
             @NotNull
             @Override
-            public Map<String, Map<String, Station>> loadAll(@NotNull Iterable<? extends String> keys) {
+            public Map<String, Map<String, StationInfo>> loadAll(@NotNull Iterable<? extends String> keys) {
                 return getAllStations();
             }
         };
@@ -73,16 +73,16 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Set<Station> getStations(String language) {
+    public Set<StationInfo> getStations(String language) {
         return new HashSet<>(cache.getUnchecked(languageService.getLanguageOrFallback(language)).values());
     }
 
-    private Map<String, Map<String, Station>> getAllStations() {
+    private Map<String, Map<String, StationInfo>> getAllStations() {
         return cache.getAllPresent(languageService.getSupportedLanguages());
     }
 
-    private Map<String, Map<String, Station>> fetchAllStations() throws IOException {
-        Map<String, Map<String, Station>> stationMap = new HashMap<>();
+    private Map<String, Map<String, StationInfo>> fetchAllStations() throws IOException {
+        Map<String, Map<String, StationInfo>> stationMap = new HashMap<>();
 
         for (String language : languageService.getSupportedLanguages()) {
             stationMap.put(language, fetchStations(language));
@@ -91,7 +91,7 @@ public class StationServiceImpl implements StationService {
         return stationMap;
     }
 
-    private Map<String, Station> fetchStations(String language) throws IOException {
+    private Map<String, StationInfo> fetchStations(String language) throws IOException {
         LOGGER.info("Fetching stations for language: {}", language);
 
         Request request = new Request.Builder()
@@ -106,8 +106,8 @@ public class StationServiceImpl implements StationService {
         }
 
         return stations != null ?
-                stations.stations().stream()
-                        .collect(Collectors.toMap(Station::id, Function.identity())) :
+                stations.stationInfos().stream()
+                        .collect(Collectors.toMap(StationInfo::id, Function.identity())) :
                 Collections.emptyMap();
     }
 }

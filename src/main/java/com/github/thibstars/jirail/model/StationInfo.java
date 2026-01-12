@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Thibault Helsmoortel
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record Station(
+public record StationInfo(
         String locationX,
 
         String locationY,

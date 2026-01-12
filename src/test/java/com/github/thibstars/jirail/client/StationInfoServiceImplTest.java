@@ -2,7 +2,7 @@ package com.github.thibstars.jirail.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.thibstars.jirail.helper.LanguageService;
-import com.github.thibstars.jirail.model.Station;
+import com.github.thibstars.jirail.model.StationInfo;
 import com.github.thibstars.jirail.model.Stations;
 import java.io.IOException;
 import java.util.Set;
@@ -19,7 +19,7 @@ import org.mockito.Mockito;
 /**
  * @author Thibault Helsmoortel
  */
-class StationServiceImplTest {
+class StationInfoServiceImplTest {
 
     @Test
     void shouldGetStations() throws IOException {
@@ -47,9 +47,9 @@ class StationServiceImplTest {
         Mockito.when(call.execute()).thenReturn(response);
         Mockito.when(client.newCall(ArgumentMatchers.any(Request.class))).thenReturn(call);
 
-        Station station = Mockito.mock(Station.class);
-        Mockito.when(station.id()).thenReturn("BE.NMBS.008821006");
-        Stations stations = new Stations(Set.of(station));
+        StationInfo stationInfo = Mockito.mock(StationInfo.class);
+        Mockito.when(stationInfo.id()).thenReturn("BE.NMBS.008821006");
+        Stations stations = new Stations(Set.of(stationInfo));
         Mockito.when(objectMapper.readValue(responseBody.string(), Stations.class)).thenReturn(stations);
 
         String language = "en";
@@ -57,11 +57,11 @@ class StationServiceImplTest {
         Mockito.when(languageService.getSupportedLanguages()).thenReturn(Set.of("en"));
         StationServiceImpl stationService = new StationServiceImpl(client, objectMapper, languageService);
 
-        Set<Station> result = stationService.getStations(language);
+        Set<StationInfo> result = stationService.getStations(language);
 
         Assertions.assertNotNull(result, "Result must not be null.");
         Assertions.assertFalse(result.isEmpty(), "Result must not be empty.");
         Assertions.assertEquals(1, result.size(), "Result size must be correct.");
-        Assertions.assertEquals(station, result.stream().toList().getFirst(), "Result must match the expected.");
+        Assertions.assertEquals(stationInfo, result.stream().toList().getFirst(), "Result must match the expected.");
     }
 }

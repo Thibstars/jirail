@@ -11,7 +11,7 @@ public record LiveBoard(
         String station,
 
         @JsonProperty("stationinfo")
-        Station stationInfo,
+        StationInfo stationInfo,
 
         Departures departures
 ) {

@@ -11,7 +11,7 @@ import java.util.Set;
 public record Stations(
 
         @JsonProperty("station")
-        Set<Station> stations
+        Set<StationInfo> stationInfos
 ) {
 
 }
