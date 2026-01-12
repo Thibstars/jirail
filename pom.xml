@@ -6,7 +6,7 @@
 
     <groupId>com.github.thibstars</groupId>
     <artifactId>JiRail</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <name>JiRail</name>
     <description>Java client of the iRail API.</description>
